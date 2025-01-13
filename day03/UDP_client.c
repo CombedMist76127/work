@@ -1,50 +1,90 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
 #include <unistd.h>
-
-#define SERVER_PORT 12345  // 服务器端口号
-#define SERVER_IP "192.163.90.94"  // 服务器IP地址
-#define BUFFER_SIZE 1024  // 缓冲区大小
+#include <arpa/inet.h>
+#include <pthread.h>
  
-int main() {
-    int sockfd;
-    struct sockaddr_in server_addr;
-    char buffer[BUFFER_SIZE];
-    socklen_t addr_len;
-    ssize_t n;
+#define BUF_SIZE 1024
+#define SERVER_IP "192.168.90.94"
+#define SERVER_PORT 8080
+ 
+void *send_thread(void *);
+void *recv_thread(void *);
+ 
+int sock_fd;
+struct sockaddr_in server_addr;
+ 
+int main(int argc, char *argv[]) {
+    pthread_t send_tid, recv_tid;
+    int err;
+ 
+    // 初始化套接字地址结构
+    memset(&server_addr, 0, sizeof(server_addr));
+    server_addr.sin_family = AF_INET;
+    server_addr.sin_port = htons(SERVER_PORT);
+    inet_pton(AF_INET, SERVER_IP, &server_addr.sin_addr);
  
     // 创建UDP套接字
-    sockfd = socket(AF_INET, SOCK_DGRAM, 0);
-    if (sockfd < 0) {
+    sock_fd = socket(AF_INET, SOCK_DGRAM, 0);
+    if (sock_fd < 0) {
         perror("创建套接字失败");
         exit(EXIT_FAILURE);
     }
  
-    // 配置服务器地址
-    memset(&server_addr, 0, sizeof(server_addr));
-    server_addr.sin_family = AF_INET;  // 使用IPv4地址
-    server_addr.sin_port = htons(SERVER_PORT);  // 设置端口号，转换为网络字节序
-    inet_pton(AF_INET, SERVER_IP, &server_addr.sin_addr);  // 将IP地址从文本格式转换为二进制格式
- 
-    // 发送消息到服务器
-    const char *message = "Hello, UDP Server!";
-    sendto(sockfd, message, strlen(message), 0, (struct sockaddr *)&server_addr, sizeof(server_addr));
-    printf("已向服务器发送消息：%s\n", message);
- 
-    // 接收服务器的响应
-    addr_len = sizeof(server_addr);
-    n = recvfrom(sockfd, buffer, BUFFER_SIZE, 0, (struct sockaddr *)&server_addr, &addr_len);
-    if (n > 0) {
-        buffer[n] = '\0';  // 确保字符串以'\0'结尾
-        printf("接收到服务器的响应：%s\n", buffer);
-    } else {
-        printf("未接收到服务器的响应或接收出错。\n");
+    // 创建发送线程
+    err = pthread_create(&send_tid, NULL, send_thread, NULL);
+    if (err != 0) {
+        perror("无法创建发送线程");
+        exit(EXIT_FAILURE);
     }
  
+    // 创建接收线程
+    err = pthread_create(&recv_tid, NULL, recv_thread, NULL);
+    if (err != 0) {
+        perror("无法创建接收线程");
+        exit(EXIT_FAILURE);
+    }
+ 
+    // 等待线程完成
+    pthread_join(send_tid, NULL);
+    pthread_join(recv_tid, NULL);
+ 
     // 关闭套接字
-    close(sockfd);
+    close(sock_fd);
+ 
     return 0;
+}
+ 
+void *send_thread(void *data) {
+    char send_buf[BUF_SIZE];
+    while (1) {
+        printf("输入信息 (输入“exit”取消): ");
+        fgets(send_buf, BUF_SIZE, stdin);
+        if (!strncmp(send_buf, "exit", 4)) {
+            break;
+        }
+        sendto(sock_fd, send_buf, strlen(send_buf), 0, 
+               (struct sockaddr *)&server_addr, sizeof(server_addr));
+    }
+    pthread_exit(NULL);
+}
+ 
+void *recv_thread(void *data) {
+    char recv_buf[BUF_SIZE];
+    struct sockaddr_in server_addr;
+    socklen_t addr_len;
+    int recv_len;
+    while (1) {
+        addr_len = sizeof(server_addr);
+        recv_len = recvfrom(sock_fd, recv_buf, BUF_SIZE, 0, 
+                            (struct sockaddr *)&server_addr, &addr_len);
+        if (recv_len < 0) {
+            perror("接收错误");
+            continue;
+        }
+        recv_buf[recv_len] = '\0';
+        printf("接收信息：%s\n", recv_buf);
+    }
+    pthread_exit(NULL);
 }
