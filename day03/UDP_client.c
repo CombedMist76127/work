@@ -6,7 +6,7 @@
 #include <unistd.h>
 
 #define SERVER_PORT 12345  // 服务器端口号
-#define SERVER_IP "127.0.0.1"  // 服务器IP地址
+#define SERVER_IP "192.163.90.94"  // 服务器IP地址
 #define BUFFER_SIZE 1024  // 缓冲区大小
  
 int main() {
