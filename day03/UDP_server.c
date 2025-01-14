@@ -40,7 +40,7 @@ int main() {
         // 接收数据
         ssize_t recv_len = recvfrom(sock_fd, buffer, BUF_SIZE, 0, (struct sockaddr *)&client_addr, &addr_len);
         if (recv_len < 0) {
-            perror("接受错误");
+            perror("接收错误");
             break;
         }
         buffer[recv_len] = '\0';
