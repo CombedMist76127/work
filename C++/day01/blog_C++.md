@@ -74,7 +74,7 @@ int main()
 ```
 ## 三、C++中的字符串   
 ### 1.**赋值操作**    
-C++ 的`string`类支持多种赋值方式：
+&ensp;&ensp;&ensp;&ensp;C++ 的`string`类支持多种赋值方式：
 ```C++
 string s1 = "Hello";      // 直接赋值
 string s2;
@@ -83,7 +83,7 @@ string s3(s1);            // 拷贝构造
 string s4(5, 'A');        // 重复字符赋值，s4 = "AAAAA"
 ```
 ### 2.**查找和替换**    
-`string`提供了`find()`和`replace()`函数用于查找和替换子字符串：
+&ensp;&ensp;&ensp;&ensp;`string`提供了`find()`和`replace()`函数用于查找和替换子字符串：
 ```C++
 string s = "Hello, World!";
 size_t pos = s.find("World");  // 查找子字符串 "World"
@@ -92,7 +92,7 @@ if (pos != string::npos) {
 }
 ```
 ### 3.**字符串比较**    
-C++ 中可以直接使用关系运算符（如 ==, !=, <, > 等）来比较 string 对象：
+&ensp;&ensp;&ensp;&ensp;C++ 中可以直接使用关系运算符（如 ==, !=, <, > 等）来比较 string 对象：
 ```C++
 string s1 = "apple";
 string s2 = "banana";
@@ -104,7 +104,7 @@ if (s1 == s2) {
 }
 ```
 ### 4.**字符串存取**   
-可以使用下标操作符 [] 或 at() 方法来访问和修改字符串中的字符：
+&ensp;&ensp;&ensp;&ensp;可以使用下标操作符 [] 或 at() 方法来访问和修改字符串中的字符：
 ```C++
 string s = "Hello";
 char c = s[1];      // 访问第二个字符 'e'
@@ -112,26 +112,26 @@ char c2 = s.at(2);  // 使用 at() 方法访问第三个字符 'l'
 ```
 **注意**："[]"不会检查越界，而"at()"会进行越界检查。   
 ### 5.**字符串插入**   
-使用`insert()`函数可以在指定位置插入子字符串：
+&ensp;&ensp;&ensp;&ensp;使用`insert()`函数可以在指定位置插入子字符串：
 ```C++
 string s = "Hello!";
 s.insert(5, " C++");  // 在索引5的位置插入 " C++"，结果为 "Hello C++!"
 ```
 ### 6.**字符串删除**   
-`string`类提供`erase()`函数来删除字符串中的部分内容：
+&ensp;&ensp;&ensp;&ensp;`string`类提供`erase()`函数来删除字符串中的部分内容：
 ```C++
 string s = "Hello, C++!";
 s.erase(5, 7);  // 从索引5开始，删除7个字符，结果为 "Hello"
 ```
 ### 7.**字符串清空**   
-可以使用 clear() 函数来清空字符串的内容：
+&ensp;&ensp;&ensp;&ensp;可以使用 clear() 函数来清空字符串的内容：
 ```C++
 string s = "Hello!";
 s.clear();  // 清空字符串，s 变为空字符串 ""
 ```
 ### 8.**风格转换**   
 #### **C++ 字符串转风格字符串**    
-使用`string`类的`.c_str()`成员函数可以将C++字符串转换为C风格的字符串`（const char*）`。
+&ensp;&ensp;&ensp;&ensp;使用`string`类的`.c_str()`成员函数可以将C++字符串转换为C风格的字符串`（const char*）`。
 ```C++
 #include <iostream>
 #include <string>
@@ -145,7 +145,7 @@ int main() {
 }
 ```
 #### **C风格字符串转C++字符串**    
-C风格的字符串（字符数组）可以直接赋值给C++的`string`，C++会自动进行转换。
+&ensp;&ensp;&ensp;&ensp;C风格的字符串（字符数组）可以直接赋值给C++的`string`，C++会自动进行转换。
 ```C++
 #include <iostream>
 #include <string>
@@ -159,12 +159,12 @@ int main() {
 }
 ```
 ## 四、C++中的结构体    
-C++中结构体和类的唯一的区别，就是默认的访问控制权限不同：   
+&ensp;&ensp;&ensp;&ensp;C++中结构体和类的唯一的区别，就是默认的访问控制权限不同：   
 * 类中成员的默认访问权限：private    
 * 结构体中成员的默认访问权限：public    
-    在C++中，结构体与类几乎没有区别（除了默认的访问权限外，结构体默认是`public`的），可以包含数据成员和成员函数。这使得C++的结构体功能大大增强，能够支持面向对象编程。    
+&ensp;&ensp;&ensp;&ensp;在C++中，结构体与类几乎没有区别（除了默认的访问权限外，结构体默认是`public`的），可以包含数据成员和成员函数。这使得C++的结构体功能大大增强，能够支持面向对象编程。    
 ## 五、C++中的bool类型   
-bool类型是C++中用于表示布尔值的数据类型，表示真或假。   
+&ensp;&ensp;&ensp;&ensp;bool类型是C++中用于表示布尔值的数据类型，表示真或假。   
 ### **取值**   
 * true：表示真，数值为 1。   
 * false：表示假，数值为 0。   
@@ -185,7 +185,7 @@ int main() {
 ```
 ## 六、git在Linux环境下的配置    
 **git自动推送**   
-linux下git的安装：   
+&ensp;&ensp;&ensp;&ensp;linux下git的安装：   
 `sudo apt-get install git`   
 ### 1.**绑定公钥**   
 ```
