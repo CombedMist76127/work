@@ -231,7 +231,7 @@ public:
 * 继承关系：  
     * Student继承自Person（带空心三角形的实线）
 
-#### 4）绘制和使用方法
+### 4）绘制和使用方法
 ‌**1.选择工具‌：**    
 &ensp;&ensp;&ensp;&ensp;有许多工具可以用来绘制UML类图，如Visual Paradigm、StarUML、PlantUML、Lucidchart等。
 
