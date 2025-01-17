@@ -14,8 +14,6 @@ public:
     void viewScore() const {
         std::cout << "姓名: " << name << "\n学号: " << studentId << "\n成绩: " << score << std::endl;
     }
- 
-    // 其他setter和getter方法（如果需要）
 };
  
 int main() {
