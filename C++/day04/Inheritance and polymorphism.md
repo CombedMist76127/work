@@ -46,7 +46,7 @@ public:
 
 ### 4）派生类构造函数的定义：
 
-* 派生类构造函数的定义：(类外定义)
+* 派生类构造函数的定义（类外定义）：
 ```
 派生类名::派生类名（参数总表）:基类名1（参数名表1），基类名2（参数名表2），......，成员对象名1（成员对象参数名表1），成员对象名2（成员对象参数名表2），......
 
@@ -152,50 +152,50 @@ void Test()
 }
 ```
 ### 9）继承与静态成员：
-&ensp;&ensp;&ensp;&ensp;基类定义了static成员，则整个继承体系中只有一个这样的成员。无论派生出多少个子类，都只有一个`static`成员实例。即：如果我们重新定义了一个静态成员，所有在基类中的其他重载函数会被隐藏。
+&ensp;&ensp;&ensp;&ensp;基类定义了`static`成员，则整个继承体系中只有一个这样的成员。无论派生出多少个子类，都只有一个`static`成员实例。即：如果我们重新定义了一个静态成员，所有在基类中的其他重载函数会被隐藏。
 ```C++
 class dad
 {
 public:
-static int a;
-static int geta()
-{
-return a;
-}
-static int geta(int b)
-{
-return a + b;
-}
+    static int a;
+    static int geta()
+    {
+        return a;
+    }
+    static int geta(int b)
+    {
+        return a + b;
+    }
 };
 int dad::a = 99;
 class son :public dad
 {
 public:
-static int a;//基类静态成员的属性将会被隐藏
-static int geta(int b, int c)//重新定义一个函数，基类中重载的函数被隐藏
-{
-return a + b + c;
-}
+    static int a;//基类静态成员的属性将会被隐藏
+    static int geta(int b, int c)//重新定义一个函数，基类中重载的函数被隐藏
+    {
+        return a + b + c;
+    }
 };
 int son::a = 66;
 class girl:public dad
 {
 public:
-static int a;//基类静态成员的属性将会被隐藏
-static void geta(int b, int c)//改变基类函数的某个特征，返回值或者参数个数，将会隐藏基类重载的函数
-{
-cout << a + b + c << endl;
-}
+    static int a;//基类静态成员的属性将会被隐藏
+    static void geta(int b, int c)//改变基类函数的某个特征，返回值或者参数个数，将会隐藏基类重载的函数
+    {
+        cout << a + b + c << endl;
+    }
 };
 int girl::a = 44;
 void test()
 {
-son s;
-girl g;
-cout << s.a << endl;//输出66
-cout << s.geta(1, 2) << endl;;//只能访问son类中的geta，不能访问父类中的geta
-cout << g.a << endl;//输出44，只能访问girl中的a
-g.geta(3, 4);//只能访问girl中的geta
+    son s;
+    girl g;
+    cout << s.a << endl;//输出66
+    cout << s.geta(1, 2) << endl;;//只能访问son类中的geta，不能访问父类中的geta
+    cout << g.a << endl;//输出44，只能访问girl中的a
+    g.geta(3, 4);//只能访问girl中的geta
 }
 ```
 ### 10）虚基类：
