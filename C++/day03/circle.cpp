@@ -3,19 +3,19 @@
  
 class Circle {
 private:
-    double radius; // 半径
+    int radius; // 半径
 public:
-    Circle(double r) : radius(r) {} // 构造函数
+    Circle(int r) : radius(r) {} // 构造函数
  
-    double area() const { // 计算并返回圆的面积
+    int area() const { // 计算并返回圆的面积
         return 3.14159 * radius * radius;
     }
  
-    double circumference() const { // 计算并返回圆的周长
+    int circumference() const { // 计算并返回圆的周长
         return 2 * 3.14159 * radius;
     }
  
-    void resize(double percent) { // 按指定百分比调整圆的半径
+    void resize(int percent) { // 按指定百分比调整圆的半径
         radius *= (1 + percent / 100.0);
     }
 };
