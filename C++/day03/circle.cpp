@@ -1,21 +1,31 @@
+#include <iostream>
 #include <cmath>
  
 class Circle {
+private:
+    double radius; // 半径
 public:
-    Circle(int x, int y, int r) : center(x, y), radius(r) {}
+    Circle(double r) : radius(r) {} // 构造函数
  
-    // 判断两个圆是否相切
-    bool isTangentTo(const Circle& other) const {
-        int distanceSquared = (center - other.center).getSquaredLength();
-        int sumOfRadii = radius + other.radius;
-        int differenceOfRadii = std::abs(radius - other.radius);
- 
-        // 如果两个圆相切，它们的半径之和减去两个圆半径的差的绝对值应该等于两圆心距的平方
-        return distanceSquared == sumOfRadii - differenceOfRadii &&
-               distanceSquared > 0 && sumOfRadii > differenceOfRadii;
+    double area() const { // 计算并返回圆的面积
+        return 3.14159 * radius * radius;
     }
  
-private:
-    Point center; // 假设有一个已定义的Point类来表示圆心
-    int radius; // 圆的半径
+    double circumference() const { // 计算并返回圆的周长
+        return 2 * 3.14159 * radius;
+    }
+ 
+    void resize(double percent) { // 按指定百分比调整圆的半径
+        radius *= (1 + percent / 100.0);
+    }
 };
+ 
+int main() {
+    Circle c1(10.0); // 创建一个半径为10的圆
+    std::cout << "Circle c1: Area = " << c1.area() << ", Circumference = " << c1.circumference() << std::endl;
+ 
+    c1.resize(20); // 圆的半径增加20%
+    std::cout << "After resizing, Circle c1: Area = " << c1.area() << ", Circumference = " << c1.circumference() << std::endl;
+ 
+    return 0;
+}
