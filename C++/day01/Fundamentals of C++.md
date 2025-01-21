@@ -2,7 +2,7 @@
 ## 一、C++输入输出流的使用
 ### 示例程序
 #### 输出
-```C++
+```cpp
 #include <iostream>
 using namespace std;
 
@@ -12,7 +12,7 @@ int main_1() {
 }
 ```
 #### 输入
-```C++
+```cpp
 #include "iostream"
 using namespace std;
 
@@ -32,7 +32,7 @@ int main()
 &ensp;&ensp;&ensp;&ensp;程序中使用的是`std::cout`和`std::cin`，而不是直接写`cout`和`cin`。这是因为C++中的所有标准库内容都放在了一个叫"std"的命名空间里。命名空间的作用是为了避免不同代码之间的名字冲突。   
 ### 2.**如何自己编写命名空间**       
 &ensp;&ensp;&ensp;&ensp;在C++中，我们可以自己定义命名空间，将相关的变量、函数等封装到一个命名空间里，避免与其他部分的代码产生冲突。定义命名空间的基本格式如下：
-```
+```cpp
 namespace 命名空间名{
 	数据类型1 变量1;
 	数据类型2 变量2;
@@ -46,7 +46,7 @@ namespace 命名空间名{
 
 ### 4.**命名空间嵌套**    
 &ensp;&ensp;&ensp;&ensp;在C++中，命名空间不仅可以独立存在，还可以嵌套在其他命名空间中。嵌套命名空间的作用是将更细粒度的功能模块分组管理。通过命名空间的嵌套，我们可以进一步组织代码，避免命名冲突。   
-```C++
+```cpp
 #include <iostream>
 #include <cstring>
 
@@ -75,7 +75,7 @@ int main()
 ## 三、C++中的字符串   
 ### 1.**赋值操作**    
 &ensp;&ensp;&ensp;&ensp;C++ 的`string`类支持多种赋值方式：
-```C++
+```cpp
 string s1 = "Hello";      // 直接赋值
 string s2;
 s2 = "World";             // 使用赋值运算符
@@ -84,7 +84,7 @@ string s4(5, 'A');        // 重复字符赋值，s4 = "AAAAA"
 ```
 ### 2.**查找和替换**    
 &ensp;&ensp;&ensp;&ensp;`string`提供了`find()`和`replace()`函数用于查找和替换子字符串：
-```C++
+```cpp
 string s = "Hello, World!";
 size_t pos = s.find("World");  // 查找子字符串 "World"
 if (pos != string::npos) {
@@ -93,7 +93,7 @@ if (pos != string::npos) {
 ```
 ### 3.**字符串比较**    
 &ensp;&ensp;&ensp;&ensp;C++ 中可以直接使用关系运算符（如 ==, !=, <, > 等）来比较 string 对象：
-```C++
+```cpp
 string s1 = "apple";
 string s2 = "banana";
 
@@ -105,7 +105,7 @@ if (s1 == s2) {
 ```
 ### 4.**字符串存取**   
 &ensp;&ensp;&ensp;&ensp;可以使用下标操作符 [] 或 at() 方法来访问和修改字符串中的字符：
-```C++
+```cpp
 string s = "Hello";
 char c = s[1];      // 访问第二个字符 'e'
 char c2 = s.at(2);  // 使用 at() 方法访问第三个字符 'l'
@@ -113,26 +113,26 @@ char c2 = s.at(2);  // 使用 at() 方法访问第三个字符 'l'
 **注意**："[]"不会检查越界，而"at()"会进行越界检查。   
 ### 5.**字符串插入**   
 &ensp;&ensp;&ensp;&ensp;使用`insert()`函数可以在指定位置插入子字符串：
-```C++
+```cpp
 string s = "Hello!";
 s.insert(5, " C++");  // 在索引5的位置插入 " C++"，结果为 "Hello C++!"
 ```
 ### 6.**字符串删除**   
 &ensp;&ensp;&ensp;&ensp;`string`类提供`erase()`函数来删除字符串中的部分内容：
-```C++
+```cpp
 string s = "Hello, C++!";
 s.erase(5, 7);  // 从索引5开始，删除7个字符，结果为 "Hello"
 ```
 ### 7.**字符串清空**   
 &ensp;&ensp;&ensp;&ensp;可以使用 clear() 函数来清空字符串的内容：
-```C++
+```cpp
 string s = "Hello!";
 s.clear();  // 清空字符串，s 变为空字符串 ""
 ```
 ### 8.**风格转换**   
 #### **C++ 字符串转风格字符串**    
 &ensp;&ensp;&ensp;&ensp;使用`string`类的`.c_str()`成员函数可以将C++字符串转换为C风格的字符串`（const char*）`。
-```C++
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -146,7 +146,7 @@ int main() {
 ```
 #### **C风格字符串转C++字符串**    
 &ensp;&ensp;&ensp;&ensp;C风格的字符串（字符数组）可以直接赋值给C++的`string`，C++会自动进行转换。
-```C++
+```cpp
 #include <iostream>
 #include <string>
 using namespace std;
@@ -170,7 +170,7 @@ int main() {
 * true：表示真，数值为 1。   
 * false：表示假，数值为 0。   
 ### **使用示例**   
-```C++
+```cpp
 #include <iostream>
 using namespace std;
 
