@@ -4,7 +4,7 @@
 &ensp;&ensp;&ensp;&ensp;继承是实现代码重用的重要手段，继承是利用已存在的类的形式，在保持原有类特性的基础上进行扩展，增加功能。这样产生新的类，称为**派生类**。继承的语法是：在代码中和原来一样给出该类的名字，但在左括号前加一个冒号和基类的名字（对于多重继承，要给出多个基类名，用逗号隔开）。    
 &ensp;&ensp;&ensp;&ensp;派生类继承基类的数据和函数，继承可以调用基类的函数实现自己的函数。
 
-```C++
+```cpp
 class A
 {
 public:
@@ -47,7 +47,7 @@ public:
 ### 4）派生类构造函数的定义
 
 * 派生类构造函数的定义（类外定义）：
-```
+```cpp
 派生类名::派生类名（参数总表）:基类名1（参数名表1），基类名2（参数名表2），......，成员对象名1（成员对象参数名表1），成员对象名2（成员对象参数名表2），......
 
 {
@@ -76,7 +76,7 @@ public:
 * 父类对象的指针和引用可以直接指向子类对象
 * 子类对象的指针和引用不能直接指向父类对象，但可以通过强制类型转换完成
 
-```C++
+```cpp
 class Person
 {
 public:
@@ -122,7 +122,7 @@ void Test()
 
 ### 8）友元与继承
 &ensp;&ensp;&ensp;&ensp;友元关系不能继承，基类的友元对派生类没有特殊的访问权限。
-```C++
+```cpp
 //友元与继承
 class Person
 {
@@ -153,7 +153,7 @@ void Test()
 ```
 ### 9）继承与静态成员
 &ensp;&ensp;&ensp;&ensp;基类定义了`static`成员，则整个继承体系中只有一个这样的成员。无论派生出多少个子类，都只有一个`static`成员实例。即：如果我们重新定义了一个静态成员，所有在基类中的其他重载函数会被隐藏。
-```C++
+```cpp
 class dad
 {
 public:
@@ -201,7 +201,7 @@ void test()
 ### 10）虚基类
 #### 1.虚基类
 &ensp;&ensp;&ensp;&ensp;如果一个类派生有多个直接基类，而这些基类又有一个共同的基类，即菱形派生，则在最终的派生类中会保留该间接基类的共同基类的多份同名成员。在引用这些同名的成员时必须在派生类对象后增加直接基类，以免产生二义性，使其唯一的标识一个成员。如：`c1.A::diaplay()`。在一个类中保留间接共同基类的多分同名成员，这种现象是人们不希望出现的。C++提供虚基类的方法，使得在继承间接共同基类时只保留一份成员。
-```C++
+```cpp
 class  A//声明基类A
 {…};
 class B :virtual public  A//声明类B是类A的公用派生类，A是B的虚基类
@@ -216,7 +216,7 @@ class C :virtual public  A//声明类C是类A的公用派生类，A是C的虚基
 &ensp;&ensp;&ensp;&ensp;需要注意的是，为了保证虚基类在派生类中只继承一次，应当在该基类的所有直接派生类中声明为虚基类，否则仍会出现对基类的多次继承。    
 #### 2.虚基类的初始化与构造函数
 &ensp;&ensp;&ensp;&ensp;虚基类的初始化如果在虚基类中定义了带参数的构造函数，而且没有定义默认构造函数，则在其所有派生类中（包括直接派生和间接派生的类中），通过构造函数的初始化表对虚基类进行初始化。
-```C++
+```cpp
 class
 A//定义基类A
 {
@@ -245,7 +245,7 @@ class D :public B,public C
 ## 二、C++多态
 &ensp;&ensp;&ensp;&ensp;C++中的虚函数的作用主要是实现了多态的机制。关于多态，简而言之就是用父类型别的指针指向其子类的实例，然后通过父类的指针调用实际子类的成员函数。这种技术可以让父类的指针有“多种形态”。
 ### 1）多态的引入
-```C++
+```cpp
 class Parent
 {
 public:
@@ -283,7 +283,7 @@ void howtoPrint2(Parent &base){
 &ensp;&ensp;&ensp;&ensp;上边定义了两个类，并且父类与子类都有一个同名函数`printP()`，下面通过几种方式测试案例：   
 
 * 定义一个基类指针，让指针分别指向基类与子类对象，然后调用`printP()`
-```C++
+```cpp
 void main(int argc, char const *argv[])
 {
     Parent *p = NULL;
@@ -300,7 +300,7 @@ void main(int argc, char const *argv[])
 //两个执行的结果都是调用基类的printP()函数
 ```
 * 定义基类的引用分别指向基类与派生类
-```C++
+```cpp
 void main(int argc, char const *argv[])
 {
 
@@ -314,7 +314,7 @@ void main(int argc, char const *argv[])
 //结果也都是调用父类的printP()函数
 ```
 * 定义一个函数，即上边的`howtoPrint()`，函数参数为基类指针，然后定义一个指向基类的指针，让改指针分别指向基类对象与派生类对象
-```C++
+```cpp
 void main(int argc, char const *argv[])
 {
     Parent *p = NULL;
@@ -329,7 +329,7 @@ void main(int argc, char const *argv[])
 //结果都是执行父类的printP()函数
 ```
 * 定义一个函数，即上边的`howtoPrint2()`函数，函数参数为基类对象的引用然后分别传入基类对象引用和子类对象引用：
-```C++
+```cpp
 void main(int argc, char const *argv[])
 {
     Parent *p = NULL;
@@ -351,7 +351,7 @@ void main(int argc, char const *argv[])
 &ensp;&ensp;&ensp;&ensp;虚函数是一个类的成员函数，在类成员函数前添加`virtual`关键字后，该函数就被称作虚函数。有了虚函数之后就可以根据传入对象的不同调用不同的成员函数。   
 &ensp;&ensp;&ensp;&ensp;当在派生类中重新定义虚函数时，不必加关键字`virtual`。但重定义时不仅要同名，而且它的参数表和返回值类型必须全部与基类中的虚函数一样，否在会出错。   
 &ensp;&ensp;&ensp;&ensp;以下为加了虚函数实现多态的结果：   
-```C++
+```cpp
 class Parent
 {
 public:
@@ -380,7 +380,7 @@ private:
 ```
 &ensp;&ensp;&ensp;&ensp;基类与派生类的的同名函数要想实现多态，基类的同名函数前必须加上`virtual`关键字。  
 &ensp;&ensp;&ensp;&ensp;下面调用上边的四个测试函数看问题是否解决：
-```C++
+```cpp
 //测试一：
 void main(int argc, char const *argv[])
 {
@@ -461,7 +461,7 @@ void main(int argc, char const *argv[])
 ### 6）多态实现原理——`VPTR`指针与虚函数表
 &ensp;&ensp;&ensp;&ensp;主要根据编译器在何处动了手脚，从而支持了多态。    
 &ensp;&ensp;&ensp;&ensp;从下面的代码来分析：   
-```C++
+```cpp
 class Parent{
     public:
         Parent(int a=0){
