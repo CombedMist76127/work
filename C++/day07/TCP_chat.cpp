@@ -15,12 +15,12 @@ void client_session(tcp::socket &sock) {
             boost::system::error_code error;
             size_t len = sock.read_some(boost::asio::buffer(data), error);
             if (error == boost::asio::error::eof)
-                break; // Connection closed cleanly by peer.
+                break;
             else if (error)
-                throw boost::system::system_error(error); // Some other error.
+                throw boost::system::system_error(error);
             std::string message(data, len);
  
-            // Broadcast message to all clients.
+            //向所有客户端广播消息
             for (auto &client : clients) {
                 if (client.first != sock.native_handle()) {
                     client.second.write_some(boost::asio::buffer(message));
@@ -42,11 +42,11 @@ int main() {
             acceptor.accept(sock);
             std::cout << "Client connected.\n";
  
-            // Store the socket in a map to keep track of it.
+            //将套接字存储在map中以跟踪
             clients[sock.native_handle()] = sock;
  
             boost::thread t(client_session, std::ref(sock));
-            t.detach(); // Detach to allow the thread to run independently.
+            t.detach(); //分离以允许线程独立运行
         }
     } catch (std::exception &e) {
         std::cerr << "Exception in main: " << e.what() << "\n";
