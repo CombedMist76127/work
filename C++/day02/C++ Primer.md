@@ -5,7 +5,7 @@
 ### 1）使用`new`分配内存
 #### 1.动态分配单个对象
 **初始化：**
-```C++
+```cpp
 int *pi1 = new int; // 默认初始化
 int *pi2 = new int(); // 值初始化
 int *pi2 = new int(1024); // 直接初始化
@@ -16,7 +16,7 @@ auto p1 = new auto(obj);
 ```
 #### 2.动态分配多个对象
 **初始化：**
-```C++
+```cpp
 int *pia = new int[get_size()]; // 维度不必是常量，但是必须是整形
 int *p1 = new int[42]; // 未初始化
 
@@ -60,7 +60,7 @@ int *p3 = new int[5]{1,2,3,4,5};
 * 编译器并不负责检查试图拷贝或以其它方式访问无效指针
 * 和试图使用未经初始化的变量一样，使用未经无效指针的 后果无法估计
 * 空指针：不指向任何对象（不要混淆空指针和空类型`(void)`的指针）
-```C++
+```cpp
 int *p1 = nullptr; (C++11)
 int *p2 = 0;
 int *p3 = NULL; //#include cstdlib
@@ -78,7 +78,7 @@ int *p3 = NULL; //#include cstdlib
 &ensp;&ensp;&ensp;&ensp;下面的代码中，为`void fun(int num = 5) `函数，提供了默认参数值5。    
 &ensp;&ensp;&ensp;&ensp;如果调用`fun`函数，不传入参数，则使用默认参数值5；不传入参数，打印的值为5；    
 &ensp;&ensp;&ensp;&ensp;如果调用`fun`函数，显示传入参数，则使用传入的参数；传入参数7，则打印的值为7。   
-```C++
+```cpp
 // 导入标准io流头文件，其中定义了std命名空间
 #include <iostream>
 // 导入std命名空间
@@ -108,7 +108,7 @@ int main() {
 &ensp;&ensp;&ensp;&ensp;占位参数是指在函数定义时只指定参数类型，而不指定具体参数名称的参数。这些参数的作用是在调用函数时占据一个位置，以便在以后的开发过程中可以根据需要传递不同类型的参数。
 > **注意：** 占位参数在函数体内是无法被使用的
 #### 2.代码示例
-```C++
+```cpp
 int func(int x,int );
 
 ... ...
@@ -121,7 +121,7 @@ func(1,2);   //调用func函数
 &ensp;&ensp;&ensp;&ensp;函数重载概念是编程中的一个重要特性，它允许在同一作用域内定义多个同名函数，但这些函数的参数列表（参数的数量、类型或顺序）必须不同。通过这种方式，函数重载为程序员提供了更大的灵活性，使得他们可以根据不同的参数类型和数量来调用不同的函数实现，从而实现功能的多样化和代码的复用。
 #### 2.代码示例
 &ensp;&ensp;&ensp;&ensp;以下是一个C++函数重载的例子：
-```C++
+```cpp
 #include <iostream>
 using namespace std;
  
@@ -180,7 +180,7 @@ int main() {
 
 ### 3）代码示例
 &ensp;&ensp;&ensp;&ensp;假设我们有一个简单的C++程序，包含一个`Person`类和一个`Student`类，`Student`继承自`Person`。我们可以为这个系统设计一个简单的UML类图。
-```C++
+```cpp
 // Person.h
 class Person {
 private:
